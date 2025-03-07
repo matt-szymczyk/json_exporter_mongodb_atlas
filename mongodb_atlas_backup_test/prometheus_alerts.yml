@@ -1,0 +1,29 @@
+groups:
+- name: mongodb-atlas-backup-alerts
+  rules:
+  - alert: MongoDBAtlasNoRecentBackup
+    expr: |
+      max by (cluster_name) (
+        mongodb_atlas_backup_snapshot_snapshot_completed == 1 and
+        timestamp() - mongodb_atlas_backup_snapshot_created_timestamp < 86400
+      ) != 1
+    for: 1h
+    labels:
+      severity: critical
+    annotations:
+      summary: "No successful MongoDB Atlas backup in the last 24 hours for cluster {{ $labels.cluster_name }}"
+      description: "MongoDB Atlas cluster {{ $labels.cluster_name }} has not had a successful backup in the last 24 hours."
+
+  - alert: MongoDBAtlasBackupSizeIncrease
+    expr: |
+      (
+        max by (cluster_name) (mongodb_atlas_backup_snapshot_storage_size_bytes) 
+        / 
+        max by (cluster_name) (mongodb_atlas_backup_snapshot_storage_size_bytes offset 7d)
+      ) > 1.5
+    for: 1d
+    labels:
+      severity: warning
+    annotations:
+      summary: "MongoDB Atlas backup size increased by more than 50% for cluster {{ $labels.cluster_name }}"
+      description: "MongoDB Atlas cluster {{ $labels.cluster_name }} backup size has increased by more than 50% in the last 7 days."

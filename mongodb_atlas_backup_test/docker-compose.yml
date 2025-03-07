@@ -1,0 +1,40 @@
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - monitoring
+
+  json-exporter:
+    image: prometheuscommunity/json-exporter:latest
+    ports:
+      - "7979:7979"
+    volumes:
+      - ../mongodb_atlas_backup_config.yml:/config.yml
+    command:
+      - '--config.file=/config.yml'
+    networks:
+      - monitoring
+
+  # Mock MongoDB Atlas API for testing
+  mockserver:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./mock_data.json:/usr/share/nginx/html/mongodb_backup.json
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge

@@ -1,0 +1,24 @@
+---
+modules:
+  mongodb_atlas_backup:
+    metrics:
+    - name: mongodb_atlas_backup_snapshot
+      type: object
+      help: MongoDB Atlas backup snapshot information
+      path: '{ .results[*] }'
+      labels:
+        cluster_name: '{.links[?(@.rel=="https://cloud.mongodb.com/cluster")].href | split("/") | @[-1]}'
+        snapshot_id: '{.id}'
+        frequency_type: '{.frequencyType}'
+        status: '{.status}'
+        type: '{.type}'
+      values:
+        created_timestamp: '{.createdAt}'
+        expires_timestamp: '{.expiresAt}'
+        storage_size_bytes: '{.storageSizeBytes}'
+        snapshot_completed: '{{if eq .status "completed"}}1{{else}}0{{end}}'
+
+    http_client_config:
+      basic_auth:
+        username: "YOUR_ACCESS_KEY"
+        password: "YOUR_SECRET_KEY"

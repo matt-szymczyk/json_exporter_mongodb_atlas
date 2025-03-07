@@ -1,0 +1,112 @@
+{
+  "links": [
+    {
+      "href": "https://cloud.mongodb.com/api/atlas/v2/groups/abc123456789/clusters/sample-cluster/backup/snapshots?pageNum=1&itemsPerPage=100",
+      "rel": "self"
+    }
+  ],
+  "results": [
+    {
+      "configServerType": "DEDICATED",
+      "createdAt": "2025-03-07T02:05:05Z",
+      "expiresAt": "2025-03-12T02:07:14Z",
+      "frequencyType": "hourly",
+      "id": "backup123456789",
+      "links": [
+        {
+          "href": "https://cloud.mongodb.com/api/atlas/v2/groups/abc123456789/clusters/sample-cluster/backup/snapshots/backup123456789",
+          "rel": "self"
+        },
+        {
+          "href": "https://cloud.mongodb.com/api/atlas/v2/groups/abc123456789/clusters/sample-cluster",
+          "rel": "https://cloud.mongodb.com/cluster"
+        }
+      ],
+      "members": [
+        {
+          "cloudProvider": "AWS",
+          "copyRegions": [],
+          "id": "shard0-id-123456",
+          "replicaSetName": "atlas-shard-0"
+        },
+        {
+          "cloudProvider": "AWS",
+          "copyRegions": [],
+          "id": "shard1-id-123456",
+          "replicaSetName": "atlas-shard-1"
+        },
+        {
+          "cloudProvider": "AWS",
+          "copyRegions": [],
+          "id": "config-id-123456",
+          "replicaSetName": "atlas-config-0"
+        }
+      ],
+      "mongodVersion": "6.0.20",
+      "policyItems": [
+        "policy-id-123456"
+      ],
+      "snapshotIds": [
+        "shard0-snap-123456",
+        "shard1-snap-123456",
+        "config-snap-123456"
+      ],
+      "snapshotType": "scheduled",
+      "status": "completed",
+      "storageSizeBytes": 19269246976,
+      "type": "shardedCluster"
+    },
+    {
+      "configServerType": "DEDICATED",
+      "createdAt": "2025-03-06T14:05:11Z",
+      "expiresAt": "2025-03-20T14:07:40Z",
+      "frequencyType": "daily",
+      "id": "backup987654321",
+      "links": [
+        {
+          "href": "https://cloud.mongodb.com/api/atlas/v2/groups/abc123456789/clusters/sample-cluster/backup/snapshots/backup987654321",
+          "rel": "self"
+        },
+        {
+          "href": "https://cloud.mongodb.com/api/atlas/v2/groups/abc123456789/clusters/sample-cluster",
+          "rel": "https://cloud.mongodb.com/cluster"
+        }
+      ],
+      "members": [
+        {
+          "cloudProvider": "AWS",
+          "copyRegions": [],
+          "id": "shard0-id-987654",
+          "replicaSetName": "atlas-shard-0"
+        },
+        {
+          "cloudProvider": "AWS",
+          "copyRegions": [],
+          "id": "shard1-id-987654",
+          "replicaSetName": "atlas-shard-1"
+        },
+        {
+          "cloudProvider": "AWS",
+          "copyRegions": [],
+          "id": "config-id-987654",
+          "replicaSetName": "atlas-config-0"
+        }
+      ],
+      "mongodVersion": "6.0.20",
+      "policyItems": [
+        "policy-id-123456",
+        "policy-id-789012"
+      ],
+      "snapshotIds": [
+        "shard0-snap-987654",
+        "shard1-snap-987654",
+        "config-snap-987654"
+      ],
+      "snapshotType": "scheduled",
+      "status": "completed",
+      "storageSizeBytes": 19159412736,
+      "type": "shardedCluster"
+    }
+  ],
+  "totalCount": 2
+}
